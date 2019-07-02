@@ -1,0 +1,20 @@
+<package>
+  <name>kobuki_gazebo_demo</name>
+  <version>0.0.0</version>
+  <description>Kobuki simulation demo for Gazebo</description>
+  <author>Zoe Li</author>
+  <maintainer email="Zoe.Li@bshg.com">lizo</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- launch file dependencies -->
+
+  <run_depend>gazebo_ros</run_depend>
+  <run_depend>gazebo_plugins</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
