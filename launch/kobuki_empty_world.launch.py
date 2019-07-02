@@ -9,8 +9,8 @@ from launch.substitutions import LaunchConfiguration
 
 def generate_launch_description():
 	use_sim_time = LaunchConfiguration('use_sim_time', default='True')
-	world = os.path.join(get_package_share_directory('kobuki_gazebo'), 'worlds', "empty.world")
-	launch_file_dir = os.path.join(get_package_share_directory('kobuki_gazebo'), 'launch','includes')
+	world = os.path.join(get_package_share_directory('kobuki_gazebo_demo'), 'worlds', "kobuki_demo_empty.world")
+	launch_file_dir = os.path.join(get_package_share_directory('kobuki_gazebo_demo'), 'launch','includes')
 	return LaunchDescription([
 		ExecuteProcess(
             cmd=['gazebo', '--verbose', world, '-s', 'libgazebo_ros_init.so'],

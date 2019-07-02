@@ -9,8 +9,8 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 	use_sim_time = LaunchConfiguration('use_sim_time', default='false')
-	kobuki_navigation_prefix = get_package_share_directory('kobuki_navigation')
-	kobuki_urdf = os.path.join(kobuki_navigation_prefix,'urdf', 'kobuki.urdf')
+	kobuki_demo_prefix = get_package_share_directory('kobuki_gazebo_demo')
+	kobuki_urdf = os.path.join(kobuki_demo_prefix,'urdf', 'kobuki.urdf')
 	return LaunchDescription([
         DeclareLaunchArgument(
            'use_sim_time', 

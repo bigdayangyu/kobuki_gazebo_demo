@@ -12,12 +12,13 @@ endif()
 # Find ament packages and libraries for ament and system dependencies
 ################################################################################
 find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
 find_package(gazebo_ros_pkgs REQUIRED)
 
 ################################################################################
 # Install
 ################################################################################
-install(DIRECTORY launch models worlds
+install(DIRECTORY launch models worlds urdf
   DESTINATION share/${PROJECT_NAME}/
 )
 
@@ -35,4 +36,5 @@ endif()
 # Macro for ament package
 ################################################################################
 ament_export_dependencies(gazebo_ros_pkgs)
+ament_export_dependencies(rclcpp)
 ament_package()
