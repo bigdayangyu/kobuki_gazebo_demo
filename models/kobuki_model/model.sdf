@@ -1,7 +1,7 @@
 <sdf version='1.6'>
   <model name='kobuki_model'>
     <link name='base_footprint'>
-      <pose frame=''>0 0 0 0 -0 0</pose>
+      <pose frame=''>0 0 0 0 0 0</pose>
       <inertial>
         <pose frame=''>0.009866 2.6e-05 0.010277 0 -0 0</pose>
         <mass>2.4213</mass>
@@ -271,36 +271,50 @@
         </geometry>
       </collision>
 
-<!--       <visual name="lidar_sensor_visual">
-        <pose>-0.032 0 0.171 0 0 0</pose>
+      <visual name="hokuyo_laser">
+        <pose>-0.032 0 0.19 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://turtlebot3_burger/meshes/lds.dae</uri>
+            <uri>model://kobuki_model/meshes/hokuyo.dae</uri>
             <scale>0.001 0.001 0.001</scale>
           </mesh>
         </geometry>
-      </visual> -->
-
+      </visual>
+    <!-- HOKUYO URG-04LX-UG1 -->
+      <!-- 4m range -->
+      <!-- detection_angle 240 degrees -->
+      <!-- angle_resolution 0.36 degrees -->
+      <!-- update_rate 10Hz -->
+      
+    <!-- HOKUYO UST-10LX-UG1 -->
+      <!-- 10m range -->
+      <!-- 270 degrees -->
+      <!-- 0.25 degrees -->
+      <!-- update_rate 40Hz -->
       <sensor name="hokuyo_sensor" type="ray">
         <always_on>true</always_on>
         <visualize>true</visualize>
-        <pose>-0.032 0 0.171 0 0 0</pose>
+        <pose>-0.032 0 0.19 0 0 0</pose>
         <update_rate>40</update_rate>
         <ray>
           <scan>
             <horizontal>
-              <samples>360</samples>
-              <resolution>1.000000</resolution>
-              <min_angle>0.000000</min_angle>
-              <max_angle>6.280000</max_angle>
+              <samples>683</samples>
+              <resolution>1.00</resolution>
+              <min_angle>-1.570796</min_angle>
+              <max_angle>1.570796</max_angle>
             </horizontal>
           </scan>
           <range>
-            <min>0.120000</min>
-            <max>3.5</max>
-            <resolution>0.015000</resolution>
+            <min>0.06</min>
+            <max>10.0</max>
+            <resolution>0.001</resolution>
           </range>
           <noise>
+          <!-- Noise parameters based on published spec for Hokuyo laser
+                 achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
+                 stddev of 0.01m will put 99.7% of samples within 0.03m of the true
+                 reading. -->
             <type>gaussian</type>
             <mean>0.0</mean>
             <stddev>0.01</stddev>
@@ -308,7 +322,6 @@
         </ray>
         <plugin name="hokuyo_controller" filename="libgazebo_ros_ray_sensor.so">
           <ros>
-            <!-- <namespace>/tb3</namespace> -->
             <argument>~/out:=scan</argument>
           </ros>
           <output_type>sensor_msgs/LaserScan</output_type>
@@ -316,8 +329,6 @@
         </plugin>
       </sensor>
     </link>
-
-
 
     <link name='wheel_left_link'>
       <pose frame=''>0 0.115 0.0352 -1.5708 0 0</pose>

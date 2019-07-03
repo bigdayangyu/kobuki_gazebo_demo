@@ -1,0 +1,40 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name='test_room_object_obstacle_board'>
+    <link name='link_test_room_object_obstacle_board'>
+      <pose frame=''>0 0 0 0 0 0</pose>
+      <gravity>0</gravity>
+      <self_collide>0</self_collide>
+      <kinematic>0</kinematic>
+      <visual name='visual'>
+        <pose frame=''>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_room_object_obstacle_board/meshes/test_room_object_obstacle_board.stl</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <lighting>1</lighting>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/DarkGrey</name>
+          </script>
+        </material>
+        <cast_shadows>1</cast_shadows>
+        <transparency>0</transparency>
+      </visual>
+      <collision name='collision'>
+        <laser_retro>15.0</laser_retro>
+        <max_contacts>10</max_contacts>
+        <pose frame=''>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://test_room_object_obstacle_board/meshes/test_room_object_obstacle_board.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <static>1</static>
+  </model>
+</sdf>
