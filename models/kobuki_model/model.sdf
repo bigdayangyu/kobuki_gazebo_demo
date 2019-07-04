@@ -232,22 +232,45 @@
             <argument>~/out:=imu</argument>
           </ros>
         </plugin>
-        <pose frame=''>0.056 0.062 0.0304 0 -0 0</pose>
+        <pose frame=''>0.056 0.062 0.0202 0 -0 0</pose>
       </sensor>
     </link>
 
 
+  <!-- base_link -->
+  <joint name="base_joint" type="fixed">
+    <parent>base_footprint</parent>
+    <child> base_link</child>
+     <pose>0 0 0.01 0 0 0</pose>
+  </joint>
+
+  <link name="base_link">
+    <inertial>
+      <pose>0.01 0 0 0 0 0 </pose>
+      <inertia>
+          <ixx>0.019995</ixx>
+          <ixy>0.000</ixy>
+          <ixz>0.000</ixz>
+          <iyy>0.019995</iyy>
+          <iyz>0.000</iyz>
+          <izz>0.03675</izz>
+      </inertia>
+      <mass>2.4</mass>
+    </inertial>
+  </link>
+  
+
   <!-- Laser Link -->
     <joint name="laser_joint" type="fixed">
         <parent>base_footprint</parent>
-        <child>hokuyo_link</child>
+        <child>laser</child>
         <pose>-0.032 0 0.171 0 0 0</pose>
         <axis>
           <xyz>0 0 1</xyz>
         </axis>
     </joint>
 
-    <link name="hokuyo_link">
+    <link name="laser">
       <inertial>
         <pose>-0.020 0 0.161 0 0 0</pose>
         <inertia>
@@ -260,6 +283,7 @@
         </inertia>
         <mass>0.125</mass>
       </inertial>
+
 
       <collision name="laser_sensor_collision">
         <pose>-0.020 0 0.161 0 0 0</pose>
@@ -295,11 +319,11 @@
         <always_on>true</always_on>
         <visualize>true</visualize>
         <pose>-0.032 0 0.19 0 0 0</pose>
-        <update_rate>40</update_rate>
+        <update_rate>35</update_rate>
         <ray>
           <scan>
             <horizontal>
-              <samples>683</samples>
+              <samples>270</samples>
               <resolution>1.00</resolution>
               <min_angle>-1.570796</min_angle>
               <max_angle>1.570796</max_angle>
@@ -325,7 +349,7 @@
             <argument>~/out:=scan</argument>
           </ros>
           <output_type>sensor_msgs/LaserScan</output_type>
-          <frame_name>houyo_link</frame_name>
+          <frame_name>laser</frame_name>
         </plugin>
       </sensor>
     </link>

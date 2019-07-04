@@ -8,14 +8,20 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 def generate_launch_description():
-	use_sim_time = LaunchConfiguration('use_sim_time', default='false')
-	kobuki_demo_prefix = get_package_share_directory('kobuki_gazebo_demo')
-	kobuki_urdf = os.path.join(kobuki_demo_prefix,'urdf', 'kobuki.urdf')
+	use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+	kobuki_nav_prefix = get_package_share_directory('kobuki_navigation')
+	kobuki_urdf = os.path.join(kobuki_nav_prefix,'urdf', 'kobuki_carto.urdf')
 	return LaunchDescription([
         DeclareLaunchArgument(
            'use_sim_time', 
            default_value=use_sim_time,
            description='Use simulation (Gazebo) clock if true'),
+
+        Node(
+            package="tf2_ros",
+            node_executable="static_transform_publisher",
+            arguments=['0.1','0', '0', '0','0','0','1', 'base_footprint', 'laser']
+            ),
 
         Node(
             package='robot_state_publisher',
