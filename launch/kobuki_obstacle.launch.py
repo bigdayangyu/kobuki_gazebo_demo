@@ -10,8 +10,12 @@ from launch.substitutions import LaunchConfiguration
 def generate_launch_description():
 	
 	use_sim_time = LaunchConfiguration('use_sim_time', default='True')
-	obstacle_world = os.path.join(get_package_share_directory('kobuki_gazebo_demo'), 'worlds', "test_room_object_obstacle.world")
-	launch_file_dir = os.path.join(get_package_share_directory('kobuki_gazebo_demo'), 'launch','includes')
+	kobuki_gazebo_demo_path= get_package_share_directory('kobuki_gazebo_demo')
+	gazebo_model_path = os.path.join(kobuki_gazebo_demo_path,'models')
+	
+	os.environ['GAZEBO_MODEL_PATH'] = gazebo_model_path
+	obstacle_world = os.path.join(kobuki_gazebo_demo_path, 'worlds', "test_room_object_obstacle.world")
+	launch_file_dir = os.path.join(kobuki_gazebo_demo_path, 'launch','includes')
 	return LaunchDescription([
 		ExecuteProcess(
             cmd=['gazebo', '--verbose', obstacle_world, '-s', 'libgazebo_ros_init.so'],
