@@ -20,7 +20,9 @@ def generate_launch_description():
         Node(
             package="tf2_ros",
             node_executable="static_transform_publisher",
-            arguments=['0.1','0', '0', '0','0','0','1', 'base_link', 'laser']
+            node_name="static_transform_publisher",
+            parameters=[{'use_sim_time': use_sim_time}],
+            arguments=['-0.020','0', '0.161', '0','0','0','1', 'base_link', 'laser']
             ),
 
         Node(
