@@ -4,6 +4,7 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.actions import ExecuteProcess
+from launch.actions import SetEnvironmentVariable
 from launch.actions import IncludeLaunchDescription
 
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -16,10 +17,12 @@ def generate_launch_description():
 	world = os.path.join(kobuki_gazebo_demo_path, 'worlds', "SYV_office.world")
 	
 	gazebo_model_path = os.path.join(kobuki_gazebo_demo_path,'models')
-	os.environ['GAZEBO_MODEL_PATH'] = gazebo_model_path
+	# os.environ['GAZEBO_MODEL_PATH'] = gazebo_model_path
 
 	launch_file_dir = os.path.join(get_package_share_directory('kobuki_gazebo_demo'), 'launch','includes')
 	return LaunchDescription([
+		SetEnvironmentVariable(
+            'GAZEBO_MODEL_PATH', gazebo_model_path),
 
 		DeclareLaunchArgument(
            'use_sim_time', 
