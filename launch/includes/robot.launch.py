@@ -3,12 +3,12 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch.actions import IncludeLaunchDescription
+# from launch.actions import IncludeLaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 def generate_launch_description():
-	use_sim_time = LaunchConfiguration('use_sim_time', default='True')
+	use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 	kobuki_nav_prefix = get_package_share_directory('kobuki_navigation')
 	kobuki_urdf = os.path.join(kobuki_nav_prefix,'urdf', 'kobuki_gazebo_carto.urdf')
 	return LaunchDescription([
